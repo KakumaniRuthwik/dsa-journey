@@ -1,0 +1,25 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run C++ File",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/output/${fileBasenameNoExtension}",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "lldb",   // or gdb on Linux
+      "preLaunchTask": "Build and Run Active C++ File",  // this triggers your task.json build
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb/lldb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    }
+  ]
+}

@@ -7,7 +7,7 @@
       "command": "sh",
       "args": [
         "-c",
-        "mkdir -p '${workspaceFolder}/output' && g++ '${file}' -o '${workspaceFolder}/output/${fileBasenameNoExtension}' && '${workspaceFolder}/output/${fileBasenameNoExtension}'"
+        "mkdir -p \"${workspaceFolder}/output\" && clang++ -std=c++17 \"${file}\" -o \"${workspaceFolder}/output/${fileBasenameNoExtension}\" && \"${workspaceFolder}/output/${fileBasenameNoExtension}\""
       ],
       "options": {
         "cwd": "${workspaceFolder}"
@@ -17,7 +17,7 @@
         "isDefault": true
       },
       "problemMatcher": [],
-      "detail": "Compiles and runs the active C++ file"
+      "detail": "Compiles and runs the active C++ file with correct path handling"
     }
   ]
 }
