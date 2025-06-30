@@ -1,0 +1,23 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build and Run Active C++ File",
+      "type": "shell",
+      "command": "sh",
+      "args": [
+        "-c",
+        "mkdir -p '${workspaceFolder}/output' && g++ '${file}' -o '${workspaceFolder}/output/${fileBasenameNoExtension}' && '${workspaceFolder}/output/${fileBasenameNoExtension}'"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": [],
+      "detail": "Compiles and runs the active C++ file"
+    }
+  ]
+}
