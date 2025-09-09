@@ -1,31 +1,28 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int findMinRotatedOptimal(vector<int>& nums) {
+// Optimal: binary search for minimum in rotated sorted array (distinct values)
+int findMinRotatedOptimal(const vector<int>& nums) {
     int low = 0, high = (int)nums.size() - 1;
-    int minimum = INT_MAX;
 
-    while (low <= high) {
+    while (low < high) {
         int mid = low + (high - low) / 2;
 
-        // If left half is sorted
-        if (nums[low] <= nums[mid]) {
-            minimum = min(minimum, nums[low]);
+        // If mid element > rightmost, min must be to the right of mid
+        if (nums[mid] > nums[high]) {
             low = mid + 1;
-        }
-        // If right half is sorted
-        else {
-            minimum = min(minimum, nums[mid]);
-            high = mid - 1;
+        } else {
+            // Otherwise, min is at mid or to the left of mid
+            high = mid;
         }
     }
-    return minimum;
+    // low == high is the index of the minimum
+    return nums[low];
 }
 
 int main() {
     int n;
     if (!(cin >> n)) return 0;
-
     vector<int> nums(n);
     for (int i = 0; i < n; i++) cin >> nums[i];
 
