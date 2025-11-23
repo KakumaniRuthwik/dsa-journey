@@ -14,23 +14,26 @@ public:
     }
 };
 
-Node* arrayToLinkedList(vector<int>& arr){
+pair<Node*,Node*> arrayToLinkedList(vector<int>& arr){
     
     int size = arr.size();
 
     if(size == 0){
-        return nullptr;
+        return {nullptr, nullptr};
     }
 
     Node* head = new Node(arr[0]);
     Node* temp = head;
+
+    Node* tail = temp;
     
     for(int i = 1; i < size; i++){
         temp->next = new Node(arr[i]);
         temp = temp->next;
+        tail = temp;
     }
 
-    return head;
+    return {head, tail};
 }
 
 void linkedListTraversal(Node* head){
@@ -49,13 +52,17 @@ void insertAtBeginning(Node* &head,int data){
     head = temp;
 }
 
-void 
+void insertAtEnd(Node* &tail, int data){
+    Node* temp = new Node(data);
+    tail -> next = temp;
+    tail = temp;
+}
 
 int main(){
 
-    vector<int> arr = {10,9,8,7,6,5,4,3,2,1};
+    vector<int> arr = {1,2,3,4,5,6,7,8,9};
 
-    Node* head = arrayToLinkedList(arr);
+    auto [head, tail] = arrayToLinkedList(arr);
     
     cout << endl;
     
@@ -64,8 +71,13 @@ int main(){
     
     cout << endl;
     
+    insertAtBeginning(head, 0);
     cout << "Linked List after adding Elements at beginning : " ;
     linkedListTraversal(head);
 
+    insertAtEnd(tail, 10);
+    cout << "Linked List after adding Elements at end : " ;
+    linkedListTraversal(head);
+    
     return 0;
 }
