@@ -58,9 +58,38 @@ void insertAtEnd(Node* &tail, int data){
     tail = temp;
 }
 
+void insertAtPosition(Node* &head, Node* &tail, int position, int data){
+    if(position == 0){
+        insertAtBeginning(head, data);
+        return;
+    }
+
+    Node* temp = head;
+    int index = 0;
+
+    while(temp != nullptr && index < position - 1){
+        temp = temp->next;
+        index++;
+    }
+
+    if(temp == nullptr){
+        cout << "Position out of bounds";
+        return;
+    }
+    
+    if(temp->next == nullptr){
+        insertAtEnd(tail, data);
+        return;
+    }
+
+    Node* newNode = new Node(data);
+    newNode->next = temp->next;
+    temp->next = newNode;
+}
+
 int main(){
 
-    vector<int> arr = {1,2,3,4,5,6,7,8,9};
+    vector<int> arr = {1,2,3,4,6,7,8,9};
 
     auto [head, tail] = arrayToLinkedList(arr);
     
@@ -77,6 +106,10 @@ int main(){
 
     insertAtEnd(tail, 10);
     cout << "Linked List after adding Elements at end : " ;
+    linkedListTraversal(head);
+
+    insertAtPosition(head, tail, 5, 5);
+    cout << "Linked List after adding Elements at position 5 : " ;
     linkedListTraversal(head);
     
     return 0;
