@@ -1,0 +1,166 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+
+class Node{
+public :
+    int data;
+    Node* prev;
+    Node* next;
+
+    Node(int value){
+        data = value;
+        prev = nullptr;
+        next = nullptr;
+    }
+};
+
+class DoublyLinkedList{
+public:
+    Node* head;
+    Node* tail;
+
+    Node* arrayToDoublyLinkedList(vector<int>& arr){
+        if(arr.empty()){
+            return nullptr;
+        }
+
+        head = new Node(arr[0]);
+        Node* temp = head;
+
+        int size = arr.size();
+        for(int i = 1; i < size; i++){
+            Node* newNode = new Node(arr[i]);
+            temp->next = newNode;
+            newNode->prev = temp;
+            temp = newNode; 
+        }
+
+        tail = temp;
+        return head;
+    }
+
+    Node* insertAtHead(int data){
+        Node* newNode = new Node(data);
+        if(head == nullptr){
+            head = newNode;
+            tail = newNode;
+            return head;
+        }
+
+        head->prev = newNode;
+        newNode->next = head;
+        head = newNode;
+
+        return head;
+    }
+
+    Node* insertAtTail(int data){
+        Node* newNode = new Node(data);
+        if(head == nullptr){
+            head = newNode;
+            tail = newNode;
+            return tail;
+        }
+
+        tail->next = newNode;
+        newNode->prev = tail;
+        tail = newNode;
+
+        return tail;
+    }
+
+    Node* insertAtPosition(int data, int position){
+
+        if(position < 1){
+            return head;
+        }
+
+        if(position == 1){
+            return insertAtHead(data);
+        }
+
+        Node* newNode = new Node(data);
+        Node* temp = head;
+        int currentPosition = 1;
+
+        while(temp != nullptr && currentPosition < position - 1 ){
+            temp = temp->next;
+            currentPosition++;
+        }
+
+        if(temp == nullptr){
+            return head;
+        }
+
+        if(temp->next == nullptr){
+            return insertAtTail(data);
+        }
+
+        Node* nextNode = temp->next;
+
+        temp->next = newNode;
+        newNode->prev = temp;
+
+        newNode->next = nextNode;
+        nextNode->prev = newNode;
+
+        return head;
+    }
+
+    void displayForward(Node* head){
+        Node* temp = head;
+        while(temp != nullptr){
+            cout << temp->data << "->";
+            temp = temp->next;
+        }
+        cout << "Null";
+    }
+
+    void displayBackward(Node* tail){
+        Node* temp = tail;
+        while(temp != nullptr){
+            cout << temp -> data << "->";
+            temp = temp->prev;
+        }
+
+        cout << "Null";
+    }
+};
+
+
+
+int main(){
+
+    vector<int> arr = {1,2,3,4,6,7,8,9};
+
+
+    DoublyLinkedList dll;
+
+    Node* head = dll.arrayToDoublyLinkedList(arr);
+
+    cout << "Traversal from head : ";
+    dll.displayForward(head);
+
+    cout << endl;
+    cout << "Traversal from tail : ";
+    dll.displayBackward(dll.tail);
+
+    cout << endl;
+    cout << "Insertion at head : ";
+    head = dll.insertAtHead(0);
+    dll.displayForward(head);
+
+    cout << endl;
+    cout << "Insertion at tail : ";
+    dll.insertAtTail(10);
+    dll.displayBackward(dll.tail);
+
+    cout << endl;
+    cout << "Insertion at position 6 : ";
+    dll.insertAtPosition(5, 6);
+    dll.displayForward(dll.head);
+
+    return 0;
+
+}
