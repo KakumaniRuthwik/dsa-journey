@@ -21,6 +21,10 @@ public:
     Node* tail;
 
     Node* arrayToDoublyLinkedList(vector<int>& arr){
+        if(arr.empty()){
+            return nullptr;
+        }
+
         head = new Node(arr[0]);
         Node* temp = head;
 

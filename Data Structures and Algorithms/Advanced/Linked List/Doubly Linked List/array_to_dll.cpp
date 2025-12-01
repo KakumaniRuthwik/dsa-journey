@@ -18,6 +18,11 @@ public :
 class DoublyLinkedList{
 public:
     Node* arrayToDoublyLinkedList(vector<int>& arr){
+
+        if(arr.empty()){
+            return nullptr;
+        }
+        
         Node* head = new Node(arr[0]);
         Node* temp = head;
 
