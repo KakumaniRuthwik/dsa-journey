@@ -127,6 +127,24 @@ public:
         return head;
     }
 
+    Node* deleteAtTail(){
+        if(head == nullptr || tail == nullptr){
+            return head;
+        }
+
+        if(head->next == nullptr){
+            delete head;
+            head = nullptr;
+            tail = nullptr;
+            return head;
+        }
+
+        tail = tail->prev;
+        delete tail->next;
+        tail->next = nullptr;
+
+        return head;
+    }
 
     void displayForward(Node* head){
         Node* temp = head;
