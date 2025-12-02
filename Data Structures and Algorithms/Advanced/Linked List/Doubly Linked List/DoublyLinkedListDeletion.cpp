@@ -146,6 +146,47 @@ public:
         return head;
     }
 
+    Node* deleteAtPosition(int position){
+        if(head == nullptr){
+            return head;
+        }
+
+        if(position < 1){
+            return head;
+        }
+
+        if(position == 1){
+            return deleteAtHead();
+        }
+
+        Node* temp = head;
+        int index = 1;
+
+        while(temp != nullptr && index < position - 1){
+            temp = temp->next;
+            index++;
+        }
+
+        if(temp == nullptr || temp->next == nullptr){
+            return head;
+        }
+
+        Node* toDelete = temp->next;
+
+        if (toDelete->next == nullptr) {
+            temp->next = nullptr;
+            delete toDelete;
+            return head;
+        }
+
+        temp->next = temp->next->next;
+        temp->next->prev = temp;
+
+        delete toDelete;
+
+        return head;
+    }
+
     void displayForward(Node* head){
         Node* temp = head;
         while(temp != nullptr){
@@ -202,6 +243,16 @@ int main(){
     cout << endl;
     cout << "Deletion at Head : ";
     head = dll.deleteAtHead();
+    dll.displayForward(head);
+
+    cout << endl;
+    cout << "Deletion at Tail : ";
+    head = dll.deleteAtTail();
+    dll.displayForward(head);
+
+    cout << endl;
+    cout << "Deletion at Position 5 : ";
+    head = dll.deleteAtPosition(5);
     dll.displayForward(head);
 
     return 0;
