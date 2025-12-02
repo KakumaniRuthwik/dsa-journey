@@ -20,6 +20,7 @@ public:
     Node* head;
     Node* tail;
 
+    // Convert array to doubly linked list
     Node* arrayToDoublyLinkedList(vector<int>& arr){
         if(arr.empty()){
             return nullptr;
@@ -40,6 +41,7 @@ public:
         return head;
     }
 
+    // Insert at beginning
     Node* insertAtHead(int data){
         Node* newNode = new Node(data);
         if(head == nullptr){
@@ -55,6 +57,7 @@ public:
         return head;
     }
 
+    // Insert at end
     Node* insertAtTail(int data){
         Node* newNode = new Node(data);
         if(head == nullptr){
@@ -70,6 +73,7 @@ public:
         return tail;
     }
 
+    // Insert at a specific position (1-indexed)
     Node* insertAtPosition(int data, int position){
 
         if(position < 1){
@@ -108,6 +112,7 @@ public:
         return head;
     }
 
+    // Delete the first node
     Node* deleteAtHead(){
         if(head == nullptr){
             return head;
@@ -127,6 +132,7 @@ public:
         return head;
     }
 
+    // Delete the last node
     Node* deleteAtTail(){
         if(head == nullptr || tail == nullptr){
             return head;
@@ -146,6 +152,7 @@ public:
         return head;
     }
 
+    // Delete node at given position (1-indexed)
     Node* deleteAtPosition(int position){
         if(head == nullptr){
             return head;
@@ -187,6 +194,7 @@ public:
         return head;
     }
 
+    // Print DLL from head to tail
     void displayForward(Node* head){
         Node* temp = head;
         while(temp != nullptr){
@@ -196,6 +204,7 @@ public:
         cout << "Null";
     }
 
+    // Print DLL backward from tail to head
     void displayBackward(Node* tail){
         Node* temp = tail;
         while(temp != nullptr){
@@ -206,8 +215,6 @@ public:
         cout << "Null";
     }
 };
-
-
 
 int main(){
 
