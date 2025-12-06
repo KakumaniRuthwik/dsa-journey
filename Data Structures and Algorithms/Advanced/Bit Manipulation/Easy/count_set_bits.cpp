@@ -6,11 +6,8 @@ int countSetBits(int num){
     int count = 0;
 
     while(num > 0){
-        if(num % 2 == 1){
-            count++;
-        }
-
-        num /= 2;
+        count += (num & 1);   // Add 1 if the least significant bit is set
+        num = num >> 1;       // Shift right to process the next bit
     }
 
     return count;
