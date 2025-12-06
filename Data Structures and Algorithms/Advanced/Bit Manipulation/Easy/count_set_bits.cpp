@@ -5,9 +5,9 @@ int countSetBits(int num){
 
     int count = 0;
 
-    while(num > 0){
-        count += (num & 1);   // Add 1 if the least significant bit is set
-        num = num >> 1;       // Shift right to process the next bit
+   while(num != 0){
+        num &= (num - 1); // removes the lowest set bit
+        count++;         // count how many bits were removed
     }
 
     return count;
