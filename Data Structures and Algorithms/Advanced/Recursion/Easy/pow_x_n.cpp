@@ -1,19 +1,27 @@
-#include<bits/stdc++.h>
+#include<iostream>
 using namespace std;
 
-double myPow(double x, long long n){
-
+double power(double x, long long n){
     if(n == 0) return 1;
 
-    if(n < 0){
-        return myPow((1 / x), -n);
+    if(n == 1) return x;
+
+    if(n % 2 == 1){
+        return x * power(x, n - 1);
     }
 
-    if((n % 2) == 1){
-        return (x * myPow(x, n - 1));
+    return power(x * x, n / 2);
+}
+
+double myPow(double x, int n) {
+
+    long long num = n;
+
+    if(num < 0){
+        return (1.0 / power(x, -num));
     }
 
-    return myPow((x * x), n / 2);
+    return power(x, num);
 }
 
 int main(){
