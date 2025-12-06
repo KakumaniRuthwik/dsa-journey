@@ -1,32 +1,19 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-double myPow(double x, int n){
+double myPow(double x, long long n){
 
-    if(x == 1.0 || n == 0){
-        return 1;
-    }
-
-    long long temp = n;
+    if(n == 0) return 1;
 
     if(n < 0){
-        x = 1 / x;
-        temp = -1 * 1ll * n;
+        return myPow((1 / x), -n);
     }
 
-    double result = 1;
-
-    while(temp > 0){
-        if(temp % 2 == 1){
-            result *= x;
-            temp -= 1;
-        }else{
-            x *= x;
-            temp /= 2;
-        }
+    if((n % 2) == 1){
+        return (x * myPow(x, n - 1));
     }
 
-    return result;
+    return myPow((x * x), n / 2);
 }
 
 int main(){
